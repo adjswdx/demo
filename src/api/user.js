@@ -9,12 +9,15 @@ export function login(data) {
   })
 }
 
-export function getInfo(token) {
-  // return request({
-  //   url: '/vue-admin-template/user/info',
-  //   method: 'get',
-  //   params: { token }
-  // })
+/**
+ *  获取用户的基本资料
+ *
+ * **/
+export function getUserInfo() {
+  return request({
+    url: '/sys/profile',
+    method: 'post'
+  })
 }
 
 export function logout() {

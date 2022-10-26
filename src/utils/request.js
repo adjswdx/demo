@@ -1,8 +1,5 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import store from '@/store'
-import { getToken } from '@/utils/auth'
-
 // create an axios instance
 const service = axios.create({
   // 如果执行 npm run dev  值为 /api 正确  /api 这个代理只是给开发环境配置的代理
@@ -11,25 +8,18 @@ const service = axios.create({
   timeout: 5000 // 定义5秒超时
 }) // 创建一个axios的实例
 
-// request interceptor
-service.interceptors.request.use(
-  config => {
-    // do something before request is sent
-
-    if (store.getters.token) {
-      // let each request carry token
-      // ['X-Token'] is a custom headers key
-      // please modify it according to the actual situation
-      config.headers['X-Token'] = getToken()
-    }
-    return config
-  },
-  error => {
-    // do something with request error
-    console.log(error) // for debug
-    return Promise.reject(error)
+service.interceptors.request.use(config => {
+  // 在这个位置需要统一的去注入token
+  // eslint-disable-next-line no-undef
+  if (store.getters.token) {
+    // 如果token存在 注入token
+    // eslint-disable-next-line no-undef
+    config.headers['Authorization'] = `Bearer ${store.getters.token}`
   }
-)
+  return config // 必须返回配置
+}, error => {
+  return Promise.reject(error)
+})
 
 // 响应拦截器
 service.interceptors.response.use(response => {
