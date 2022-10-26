@@ -1,0 +1,16 @@
+#app {
+  background-color: #f90;
+  border: 1px solid black;
+}
+
+#content article h1 {
+  color: #1dc08a;
+}
+
+#content article p {
+  font-style: italic;
+}
+
+#content aside {
+  background-color: #f90;
+}

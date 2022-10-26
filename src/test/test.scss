@@ -1,0 +1,14 @@
+$highlight-color: #f90;
+$basic-border: 1px solid black;
+$nav-color: #F90;
+#app {
+    background-color:  $highlight-color;
+    border: $basic-border
+}
+#content {
+    article {
+      h1 { color: #1dc08a }
+      p {  font-style: italic; }
+    }
+    aside { background-color: #f90 }
+}
